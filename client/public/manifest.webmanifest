@@ -1,0 +1,11 @@
+{
+  "name": "Wavelength",
+  "short_name": "Wavelength",
+  "description": "Un indice, un cadran, et toute la table qui débat.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f3ecdf",
+  "theme_color": "#f3ecdf",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}
