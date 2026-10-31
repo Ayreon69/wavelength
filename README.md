@@ -2,7 +2,7 @@
 
 **Un indice. Un cadran. Toute la table qui débat.**
 
-👉 **Jouer :** lien à venir (le service Render n'est pas encore créé)
+👉 **Jouer : https://wavelength-hnfh.onrender.com** (la première ouverture peut prendre jusqu'à une minute, le temps que le serveur gratuit se réveille)
 
 Jeu multijoueur d'équipe en ligne, à jouer entre amis depuis un navigateur, sur téléphone ou ordinateur, sans compte ni installation.
 D'après *Wavelength*, le jeu de Wolfgang Warsch, Alex Hague et Justin Vickers (projet de fans, non officiel, avec ses propres visuels et ses propres cartes).
