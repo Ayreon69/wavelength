@@ -1,6 +1,6 @@
 // Accueil : l'affiche, un cadran qui joue tout seul pour montrer le principe, pseudo + avatar, créer / rejoindre une table, règles.
 import { motion } from 'framer-motion';
-import { BookOpen, House, LogIn, Plus } from 'lucide-react';
+import { BookOpen, House, MessageSquare, LogIn, Plus } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { AVATARS } from '../../../shared/protocol';
 import { Dial, SpectrumCard } from '../components/Dial';
@@ -79,9 +79,14 @@ export function Home() {
 
   return (
     <Paper className="home">
-      <a className="all-games" href="https://akhis-games.onrender.com">
-        <House size={16} aria-hidden /> Tous les jeux
-      </a>
+      <div className="home-links">
+        <a className="all-games" href="https://akhis-games.onrender.com">
+          <House size={16} aria-hidden /> Tous les jeux
+        </a>
+        <a className="all-games" href="https://akhis-games.onrender.com/feedback.html?jeu=wavelength">
+          <MessageSquare size={16} aria-hidden /> Feedback
+        </a>
+      </div>
       <div className="home-grid">
         <header className="home-hero">
           <motion.div initial={{ y: -10 }} animate={{ y: 0 }} transition={{ duration: 0.5 }}>

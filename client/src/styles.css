@@ -504,14 +504,20 @@ button {
   padding: max(20px, env(safe-area-inset-top)) 16px 0;
 }
 /* Lien vers la page qui liste tous les jeux : une ligne de l'accueil, jamais par-dessus le titre */
+.home-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 16px;
+  align-self: flex-start;
+  margin: -12px 0 4px;
+}
 .all-games {
   display: flex;
-  align-self: flex-start;
   align-items: center;
   gap: 6px;
   width: fit-content;
   min-height: 40px;
-  margin: -12px 0 4px;
   color: var(--ink-2);
   font: 700 0.88rem/1 var(--display);
   text-decoration: none;
