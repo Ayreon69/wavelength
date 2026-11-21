@@ -11,6 +11,8 @@ export const COOP_CARDS = 7;
 /** Le cadran va de 0 (tout à gauche) à 100 (tout à droite). Chaque bande de la cible en couvre 4. */
 export const BAND = 4;
 /** La cible entière : 2, 3, 4, 3, 2. */
+/** Tolérance sur les frontières de bande, pour les erreurs d'arrondi des nombres à virgule. */
+export const EDGE_SLACK = 1e-6;
 export const TARGET_SPAN = BAND * 5;
 export const CLUE_MAX = 60;
 
@@ -27,7 +29,8 @@ export type Zone = 4 | 3 | 2 | 0;
 
 /** La bande où tombe l'aiguille. Sur une frontière, on prend la plus haute, comme le veut la règle. */
 export function zoneAt(target: number, dial: number): Zone {
-  const d = Math.abs(dial - target);
+  // Cible et aiguille ont une décimale : sans cette marge, 35,3 - 33,3 donne 2,0000000000000036 et fait perdre la bande.
+  const d = Math.abs(dial - target) - EDGE_SLACK;
   if (d <= BAND / 2) return 4;
   if (d <= BAND * 1.5) return 3;
   if (d <= BAND * 2.5) return 2;

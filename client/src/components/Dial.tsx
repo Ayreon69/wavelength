@@ -1,6 +1,6 @@
 // Le cadran : la face graduée, la cible en bandes 2-3-4-3-2, l'écran qui la cache, l'aiguille qu'on tourne. Et la carte des deux idées.
 import { useEffect, useId, useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent } from 'react';
-import { BAND, type Spectrum, type Zone } from '../../../shared/protocol';
+import { BAND, EDGE_SLACK, type Spectrum, type Zone } from '../../../shared/protocol';
 import { cls } from '../lib/util';
 
 const W = 400;
@@ -147,7 +147,7 @@ export function Dial({ value, spectrum, target = null, open = false, interactive
   };
 
   const showTarget = target !== null && target !== undefined;
-  const hitBand = hit && showTarget ? BANDS.findIndex((b) => Math.abs(value - (target! + (b.from + 0.5) * BAND)) <= BAND / 2) : -1;
+  const hitBand = hit && showTarget ? BANDS.findIndex((b) => Math.abs(value - (target! + (b.from + 0.5) * BAND)) <= BAND / 2 + EDGE_SLACK) : -1;
   const ticks = size === 'lg' ? Array.from({ length: 41 }, (_, i) => i * 2.5) : [0, 25, 50, 75, 100];
 
   return (

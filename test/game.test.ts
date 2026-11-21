@@ -204,11 +204,27 @@ describe('une manche en équipes', () => {
 });
 
 describe('le plein centre', () => {
+  it("ne perd pas une bande sur une frontière à cause de l'arrondi des décimales", () => {
+    // 35,3 - 33,3 vaut 2,0000000000000036 en nombres à virgule : c'est pourtant pile la frontière du centre.
+    expect(zoneAt(33.3, 35.3)).toBe(4);
+    expect(zoneAt(33.3, 31.3)).toBe(4);
+    expect(zoneAt(33.3, 39.3)).toBe(3);
+    expect(zoneAt(33.3, 43.3)).toBe(2);
+    expect(zoneAt(33.3, 43.4)).toBe(0);
+    for (let i = 0; i < 20000; i++) {
+      const t = Math.round((1 + Math.random() * 98) * 10) / 10;
+      for (const [off, zone] of [[2, 4], [-2, 4], [6, 3], [-6, 3], [10, 2], [-10, 2]] as const) {
+        const dial = Math.round((t + off) * 10) / 10;
+        if (dial >= 0 && dial <= 100) expect(zoneAt(t, dial)).toBe(zone);
+      }
+    }
+  });
+
   it("vaut 4 points en équipes, jusqu'aux frontières de la bande", () => {
     for (const off of [0, 1, -1, 2, -2]) {
       const g = teamsGame();
       playRound(g, (t) => t + off);
-      expect(Math.abs(g.round.dial - g.round.target)).toBeLessThanOrEqual(2);
+      expect(Math.abs(g.round.dial - g.round.target)).toBeLessThanOrEqual(2 + 1e-6);
       expect(g.round.result).toMatchObject({ zone: 4, points: 4, bonusCard: false });
       expect(g.scores.A).toBe(4);
     }
