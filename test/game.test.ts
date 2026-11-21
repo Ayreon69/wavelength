@@ -203,6 +203,28 @@ describe('une manche en équipes', () => {
   });
 });
 
+describe('le plein centre', () => {
+  it("vaut 4 points en équipes, jusqu'aux frontières de la bande", () => {
+    for (const off of [0, 1, -1, 2, -2]) {
+      const g = teamsGame();
+      playRound(g, (t) => t + off);
+      expect(Math.abs(g.round.dial - g.round.target)).toBeLessThanOrEqual(2);
+      expect(g.round.result).toMatchObject({ zone: 4, points: 4, bonusCard: false });
+      expect(g.scores.A).toBe(4);
+    }
+    // Juste au-delà de la frontière, c'est la bande à 3 points.
+    const g = teamsGame();
+    playRound(g, (t) => (t > 50 ? t - 2.5 : t + 2.5));
+    expect(g.round.result).toMatchObject({ zone: 3, points: 3 });
+  });
+
+  it('rapporte 3 points et une carte en coopératif, et le dit dans le résultat', () => {
+    const g = new Game({ mode: 'coop', members: [{ id: 'p1', team: 'A' }, { id: 'p2', team: 'A' }, { id: 'p3', team: 'B' }] });
+    playRound(g, (t) => t);
+    expect(g.round.result).toMatchObject({ zone: 4, points: 3, bonusCard: true });
+  });
+});
+
 describe('le coopératif', () => {
   const members: Member[] = [
     { id: 'p1', team: 'A' },

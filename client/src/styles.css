@@ -1526,6 +1526,60 @@ button {
   }
 }
 
+/* Le petit jeu de ceux qui attendent : un guerrier, des pompes. */
+.pushups {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  margin: 6px auto 0;
+  border: 2px solid var(--ink);
+  border-radius: 18px;
+  background: linear-gradient(180deg, #2b2670, #1f1b3d);
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.pushups:focus-visible {
+  outline: 3px solid var(--pink);
+  outline-offset: 3px;
+}
+.pushups-scene {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.pushups-count {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  color: #c7cdef;
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+.pushups-count b {
+  color: #fff;
+  font-family: var(--display);
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+.pushups-hint {
+  position: absolute;
+  inset: 42% auto auto 12px;
+  max-width: 42%;
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-align: left;
+  pointer-events: none;
+}
+@media (max-height: 700px) and (max-width: 560px) {
+  .pushups-scene {
+    max-height: 120px;
+  }
+}
+
 /* En bas : ce qu'il y a à faire. */
 .panel {
   position: sticky;

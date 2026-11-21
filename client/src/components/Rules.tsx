@@ -89,7 +89,7 @@ export function RulesModal() {
         <section className="rule-case">
           <h3>Tous ensemble (coopératif)</h3>
           <p>
-            Dès 2 joueurs. Toute la table devine, chacun devient médium à son tour, sans pari. La partie dure <b>{COOP_CARDS} cartes</b>. Le plein centre vaut 3 points, mais <b>ajoute une carte</b>. À la fin, votre score vous dit si vous êtes sur la même longueur d'onde.
+            Dès 2 joueurs. Toute la table devine, chacun devient médium à son tour, sans pari. La partie dure <b>{COOP_CARDS} cartes</b>. Le plein centre vaut 3 points (et non 4 comme en équipes), mais <b>ajoute une carte</b>. À la fin, votre score vous dit si vous êtes sur la même longueur d'onde.
           </p>
         </section>
 

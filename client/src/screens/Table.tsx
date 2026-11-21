@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight, BookOpen, Check, Eye, Flag, LogOut, MoreHorizont
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { CLUE_MAX, EMOTES, TAUNTS, TEAMS, TEAM_NAME, WIN_SCORE, type PlayerView, type RoomView, type RoundView, type Side } from '../../../shared/protocol';
 import { Dial, SpectrumCard } from '../components/Dial';
+import { PushUps } from '../components/PushUps';
 import { Avatar, Button, Logo, Modal, TeamTag, Waves } from '../components/Ui';
 import { sfx } from '../lib/sound';
 import { NameOf, ZONE_TITLE, nameOf, pointsLabel, teamName } from '../lib/text';
@@ -424,7 +425,7 @@ function RevealPanel({ view, r }: { view: RoomView; r: RoundView }) {
     if (res.zone === 4) notes.push(`${TEAM_NAME[other]} pariait ${side}, mais le plein centre ne laisse rien.`);
     else notes.push(`${TEAM_NAME[other]} pariait ${side} : ${res.sidePoint ? 'bien vu, +1 point.' : 'raté.'}`);
   } else if (other && g.mode === 'teams') notes.push(`${TEAM_NAME[other]} n'a pas parié.`);
-  if (res.bonusCard) notes.push('Plein centre : une carte de plus !');
+  if (res.bonusCard) notes.push('Plein centre en coopératif : 3 points, et une carte de plus pour la partie.');
   if (res.catchUp && r.team) notes.push(`Rattrapage ! ${TEAM_NAME[r.team]} fait mouche et reste derrière : elle rejoue tout de suite.`);
   if (res.suddenDeath) notes.push('Égalité au-delà de 10 : mort subite ! Chaque équipe rejoue une manche, la meilleure gagne.');
   let over = '';
@@ -436,6 +437,7 @@ function RevealPanel({ view, r }: { view: RoomView; r: RoundView }) {
         <b>{ZONE_TITLE[res.zone]}</b>
         <span>
           {pointsLabel(res.points)}
+          {res.bonusCard ? ' + 1 carte' : ''}
           {r.team && g.mode === 'teams' ? ` pour ${TEAM_NAME[r.team]}` : ''}
         </span>
       </motion.div>
@@ -584,6 +586,7 @@ export function Table({ view }: { view: RoomView }) {
       <section className={cls('panel', `panel-${r.stage}`)} aria-live="polite">
         {r.stage === 'pick' && (isPsychic ? <PickPanel r={r} /> : <Waiting>{NameOf(view, r.psychicId)} choisit sa carte. Patience…</Waiting>)}
         {r.stage === 'clue' && (isPsychic ? <CluePanel /> : <Waiting>{NameOf(view, r.psychicId)} a vu la cible et cherche son indice.</Waiting>)}
+        {!isPsychic && (r.stage === 'pick' || r.stage === 'clue') && <PushUps />}
         {r.stage === 'guess' && <AgreePanel view={view} r={r} canAct={canGuess} />}
         {r.stage === 'side' && <SidePanel view={view} r={r} canAct={canVote} />}
         {r.stage === 'reveal' && r.result && <RevealPanel view={view} r={r} />}

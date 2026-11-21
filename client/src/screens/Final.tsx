@@ -96,7 +96,7 @@ export function Final({ view }: { view: RoomView }) {
                     <Avatar avatar={avatarOf(r.psychicId)} className="mini" />
                     <span>{r.psychicName}</span>
                     {r.team && final.mode === 'teams' && <TeamTag team={r.team} />}
-                    <b className="recap-points">{r.points ? `+${r.points}` : '0'}</b>
+                    <b className="recap-points">{final.mode === 'coop' && r.zone === 4 ? `+${r.points} points + 1 carte` : r.points ? `+${r.points}` : '0'}</b>
                   </div>
                   <p className="recap-clue">« {r.clue} »</p>
                   {r.side && (
